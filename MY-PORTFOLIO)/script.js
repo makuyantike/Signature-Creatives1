@@ -135,7 +135,7 @@ function setupLightboxListeners() {
   });
 }
 
-// ===== GALLERY GENERATION =====
+// ===== GALLERY GENERATION (DESCENDING ORDER) =====
 function generateGallery() {
   const gallery = document.querySelector(".gallery");
   if (!gallery) return;
@@ -165,41 +165,43 @@ function generateGallery() {
     gallery.appendChild(div);
   }
   
-  // 1. LOGOS
-  for (let i = 1; i <= 13; i++) {
+  // 1. LOGOS (logo12 down to logo1)
+  for (let i = 12; i >= 1; i--) {
     createGalleryItem("logo", `images/logo${i}.jpeg`, `Logo Design ${i}`);
   }
   
-  // 2. SOCIAL MEDIA FLYERS
-  for (let i = 1; i <= 13; i++) {
+  // 2. SOCIAL MEDIA FLYERS (socialflyer17 down to socialflyer1)
+  for (let i = 17; i >= 1; i--) {
     createGalleryItem("social-flyer", `images/socialflyer${i}.jpeg`, `Social Flyer ${i}`);
   }
 
-  // 3. BRAND IDENTITY
-  for (let i = 1; i <= 3; i++) {
+  // 3. BRAND IDENTITY (brandidentity4 down to brandidentity1)
+  for (let i = 4; i >= 1; i--) {
     createGalleryItem("brand-identity", `images/brandidentity${i}.jpeg`, `Brand Identity ${i}`);
   }
 
-  // 4. BUSINESS FLYERS
-  for (let i = 1; i <= 6; i++) {
+  // 4. BUSINESS FLYERS (bflyer7 down to bflyer1)
+  for (let i = 7; i >= 1; i--) {
     createGalleryItem("business-flyer", `images/bflyer${i}.jpeg`, `Business Flyer ${i}`);
   }
 
-  // 5. MENUS
-  for (let i = 1; i <= 3; i++) {
+  // 5. MENUS (menu3 down to menu1)
+  for (let i = 3; i >= 1; i--) {
     createGalleryItem("menu", `images/menu${i}.jpeg`, `Menu Design ${i}`);
   }
   
-  // 6. BUSINESS CARDS
-  for (let i = 1; i <= 3; i++) {
+  // 6. BUSINESS CARDS (businesscard3 down to businesscard1)
+  for (let i = 3; i >= 1; i--) {
     createGalleryItem("business-card", `images/businesscard${i}.jpeg`, `Business Card ${i}`);
   }
 
-  // 7. CHURCH FLYERS
-  createGalleryItem("church-flyer", "images/churchflyer1.jpeg", "Church Flyer 1");
+  // 7. CHURCH FLYERS (churchflyer6 down to churchflyer1)
+  for (let i = 6; i >= 1; i--) {
+    createGalleryItem("church-flyer", `images/churchflyer${i}.jpeg`, `Church Flyer ${i}`);
+  }
   
-  // 8. SONG ARTWORK
-  for (let i = 1; i <= 4; i++) {
+  // 8. SONG ARTWORK (songart4 down to songart1)
+  for (let i = 4; i >= 1; i--) {
     createGalleryItem("song-art", `images/songart${i}.jpeg`, `Song Artwork ${i}`);
   }
 }
