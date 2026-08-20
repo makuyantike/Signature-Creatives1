@@ -44,17 +44,22 @@
     <h2>My Work</h2>
     <p class="category-text" id="category-text"></p>
 
-    <!-- Filter Buttons -->
+    <!-- Filter Buttons: Restored and Updated Categories -->
     <div class="filter-buttons">
-      <button class="active" onclick="filterSelection('all')">All</button>
-      <button onclick="filterSelection('logo')">Logos</button>
-      <button onclick="filterSelection('flyer')">Flyers</button>
-      <button onclick="filterSelection('social')">Socials</button>
-    </div>
+  <button class="active" onclick="filterSelection('all')">All</button>
+  <button onclick="filterSelection('logo')">Logos</button>
+  <button onclick="filterSelection('social-flyer')">Social Media Flyer</button>
+  <button onclick="filterSelection('brand-identity')">Brand Identity</button>
+  <button onclick="filterSelection('business-flyer')">Business Flyers</button>
+  <button onclick="filterSelection('menu')">Menus</button>
+  <button onclick="filterSelection('business-card')">Business Cards</button>
+  <button onclick="filterSelection('church-flyer')">Church Flyers</button>
+  <button onclick="filterSelection('song-art')">Song Art Work</button>
+</div>
 
     <!-- Gallery -->
     <div class="gallery">
-      <!-- JS will generate items here -->
+      <!-- JS will dynamically generate items here perfectly -->
     </div>
   </section>
 
@@ -142,8 +147,14 @@
               <select id="service" name="service" required>
                 <option value="" disabled selected></option>
                 <option value="logo">Logo Design</option>
-                <option value="flyer">Flyer Design</option>
-                <option value="social">Social Media Design</option>
+                <option value="social-flyer">Social Media Flyer</option>
+                <option value="business-flyer">Business Flyer</option>
+                <option value="menu">Menu Design</option>
+                <option value="business-card">Business Cards</option>
+                <option value="church-flyer">Church Flyer</option>
+                <option value="song-art">Song Art Work</option>
+                <option value="billboard">Billboard Design</option>
+                <option value="brand-identity">Brand Identity</option>
                 <option value="branding">Full Branding Package</option>
                 <option value="other">Other Services</option>
               </select>
@@ -164,7 +175,6 @@
             </button>
           </form>
 
-          <!-- Success Message -->
           <div class="success-message" id="successMessage">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -224,39 +234,6 @@
     <img id="lightbox-img" src="" alt="Portfolio Image">
   </div>
 
-  <!-- JavaScript -->
   <script src="script.js"></script>
-  <script>
-// Test if clicks work
-document.addEventListener('DOMContentLoaded', function() {
-  const galleryItems = document.querySelectorAll('.gallery-item');
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  
-  console.log('Gallery items found:', galleryItems.length);
-  
-  galleryItems.forEach(item => {
-    item.addEventListener('click', function() {
-      console.log('Item clicked!');
-      const img = this.querySelector('img');
-      if (img && lightbox && lightboxImg) {
-        lightboxImg.src = img.src;
-        lightbox.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-      }
-    });
-  });
-});
-
-// Close lightbox function
-function closeLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  if (lightbox) {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-}
-</script>
-
 </body>
 </html>
