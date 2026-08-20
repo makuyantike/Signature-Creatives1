@@ -1,6 +1,7 @@
 // ===== INITIALIZATION =====
 document.addEventListener("DOMContentLoaded", function() {
   generateGallery();
+  filterSelection("all");
   
   // Smooth scroll for hero button
   const heroBtn = document.querySelector(".hero-btn");
@@ -35,6 +36,9 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   });
+
+  // Setup Lightbox Click & Key listeners once on page load
+  setupLightboxListeners();
 
   initIntersectionObserver();
   initNavbarScroll();
@@ -96,38 +100,39 @@ function openLightbox(src) {
   const lightboxImg = document.getElementById("lightbox-img");
   
   if (lightbox && lightboxImg) {
-    lightbox.style.display = "flex";
     lightboxImg.src = src;
+    lightbox.classList.add("active");
+    lightbox.style.display = "flex";
     document.body.style.overflow = "hidden";
-    setupLightboxClosing();
   }
 }
 
 function closeLightbox() {
   const lightbox = document.getElementById("lightbox");
   if (lightbox) {
+    lightbox.classList.remove("active");
     lightbox.style.display = "none";
     document.body.style.overflow = "auto";
   }
-  document.removeEventListener("keydown", handleEscapeKey);
 }
 
-function setupLightboxClosing() {
+function setupLightboxListeners() {
   const lightbox = document.getElementById("lightbox");
   if (!lightbox) return;
 
+  // Close when clicking anywhere outside the actual image
   lightbox.addEventListener("click", function(e) {
-    if (e.target === lightbox) {
+    if (e.target !== document.getElementById("lightbox-img")) {
       closeLightbox();
     }
   });
-  document.addEventListener("keydown", handleEscapeKey);
-}
 
-function handleEscapeKey(e) {
-  if (e.key === "Escape") {
-    closeLightbox();
-  }
+  // Close on Escape key
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") {
+      closeLightbox();
+    }
+  });
 }
 
 // ===== GALLERY GENERATION =====
@@ -150,47 +155,50 @@ function generateGallery() {
       this.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23213c4d'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='14' fill='%23fb802c' text-anchor='middle' dy='.3em'%3E${title}%3C/text%3E%3C/svg%3E`;
     };
     
-    img.addEventListener("click", () => openLightbox(img.src));
+    // Open image directly when clicked
+    img.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openLightbox(img.src);
+    });
     
     div.appendChild(img);
     gallery.appendChild(div);
   }
   
-  // 1. LOGOS (logo1.jpeg to logo12.jpeg)
-  for (let i = 1; i <= 13
-    ; i++) {
+  // 1. LOGOS
+  for (let i = 1; i <= 13; i++) {
     createGalleryItem("logo", `images/logo${i}.jpeg`, `Logo Design ${i}`);
   }
   
-  // 2. SOCIAL MEDIA FLYERS (socialflyer1.jpeg to socialflyer9.jpeg)
+  // 2. SOCIAL MEDIA FLYERS
   for (let i = 1; i <= 13; i++) {
     createGalleryItem("social-flyer", `images/socialflyer${i}.jpeg`, `Social Flyer ${i}`);
   }
 
-  // 3. BRAND IDENTITY (brandidentity1.jpeg to brandidentity3.jpeg)
+  // 3. BRAND IDENTITY
   for (let i = 1; i <= 3; i++) {
     createGalleryItem("brand-identity", `images/brandidentity${i}.jpeg`, `Brand Identity ${i}`);
   }
 
-  // 4. BUSINESS FLYERS (bflyer1.jpeg to bflyer4.jpeg)
+  // 4. BUSINESS FLYERS
   for (let i = 1; i <= 6; i++) {
     createGalleryItem("business-flyer", `images/bflyer${i}.jpeg`, `Business Flyer ${i}`);
   }
 
-  // 5. MENUS (menu1.jpeg to menu3.jpeg)
+  // 5. MENUS
   for (let i = 1; i <= 3; i++) {
     createGalleryItem("menu", `images/menu${i}.jpeg`, `Menu Design ${i}`);
   }
   
-  // 6. BUSINESS CARDS (businesscard1.jpeg to businesscard3.jpeg)
+  // 6. BUSINESS CARDS
   for (let i = 1; i <= 3; i++) {
     createGalleryItem("business-card", `images/businesscard${i}.jpeg`, `Business Card ${i}`);
   }
 
-  // 7. CHURCH FLYERS (churchflyer1.jpeg)
+  // 7. CHURCH FLYERS
   createGalleryItem("church-flyer", "images/churchflyer1.jpeg", "Church Flyer 1");
   
-  // 8. SONG ARTWORK (songart1.jpeg to songart4.jpeg)
+  // 8. SONG ARTWORK
   for (let i = 1; i <= 4; i++) {
     createGalleryItem("song-art", `images/songart${i}.jpeg`, `Song Artwork ${i}`);
   }
